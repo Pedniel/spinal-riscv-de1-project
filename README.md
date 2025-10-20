@@ -18,7 +18,7 @@ siehe:
 ### VHDL aus SpinalHDL
 
 ```
-cd VexRiscV
+cd VexRiscv
 sbt "runMain vexriscv.demo.de1_murax_franz"
 cp ./de1_murax_franz.vhd ../src/
 ```
