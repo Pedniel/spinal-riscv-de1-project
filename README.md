@@ -1,66 +1,102 @@
 RISCV de1_murax_franz
 ========================
 
-Der fabelhafte RISCV Softcore auf dem Terasic DE1 Board! Für Franz.
+The RISCV Softcore on the Terasic DE1 Board!
 
-### Murax Plattform mit RISCV Prozessor aus SpinalHDL
+### Murax Plattform with RISCV Processor from SpinalHDL
 
-  * 50 MHz Taktfrequenz
-  * UART mit 115200 Baud
-  * GPIO an den Roten LEDs
+  * 50 MHz Clockfrequency
+  * UART with 115200 Baud
+  * GPIO connected to the red LEDs
   * Timer
 
-siehe:
+see:
 
   * https://github.com/SpinalHDL/VexRiscv
   * https://spinalhdl.github.io/SpinalDoc-RTD/dev/index.html
+  
+### Project Navigation
 
-### VHDL aus SpinalHDL
+For convenience, navigate to the project root first, then set this alias:
 
 ```
-cd VexRiscV
+cd ~/path/to/de1_murax_franz
+alias cdproject="cd $(pwd)"
+```
+
+Now you can simply type `cdproject` from anywhere to return to the project base directory.
+
+**Note:** This alias only persists for your current terminal session. To make it permanent, add it to your shell config:
+
+If unkown, check which shell you're using
+
+```
+echo $SHELL
+```
+
+Then make the alias permanent for your shell:
+
+```
+echo 'alias cdproject="cd $(pwd)"' >> ~/.bashrc   # for bash
+
+echo 'alias cdproject="cd $(pwd)"' >> ~/.zshrc   # for zsh
+```
+
+### VHDL from SpinalHDL
+
+```
+cdproject
+cd VexRiscv
 sbt "runMain vexriscv.demo.de1_murax_franz"
 cp ./de1_murax_franz.vhd ../src/
 ```
 
-### VHDL Simulation des Prozessors
+### VHDL simulation of the processor
 
-UART sendet 'A' und LEDs wechseln nach 1 Sekunde...
+UART sends 'A' and LEDs switch after 1 second...
 
 ```
+cdproject
 cd sim
 cd de1_murax_franz
 make sim
 ```
 
-### FPGA Synthese und Download
+### FPGA synthesis and download
 
 ```
+cdproject
 cd pnr
 cd de1_murax_franz
 make prog
 ```
 
-### Software Build mit gcc
+### Software build with gcc
 
-Der Code liegt schon als fertiges Intel HEX im VexRiscV Projekt. SpinalHDL
-generiert dann aus dem Intel HEX Format den VHDL ROM Code. Man muss also
-nicht unbedingt den Code kompilieren. Wenn man kompiliert, dann muss das
-Intel HEX File aus dem VexRiscV Projekt überschrieben werden.
-
+The code is already available as a finished Intel HEX file in the VexRiscV project. 
+SpinalHDL then generates the VHDL ROM code from the Intel HEX format.
+So, you don't necessarily have to compile the code. If you compile, you must
+overwrite the Intel HEX file from the VexRiscV project.
 
 ```
+cdproject
 cd VexRiscvSocSoftware/projects/murax/demo
 make
 cp ./build/demo.hex ../../../../VexRiscv/src/main/ressource/hex/muraxDemo.hex
 ```
 
-Dann nochmal VexRiscV bauen und nochmal FPGA Synthese. Der Code landet via VHDL im
-FPGA.
+Then build VexRiscv again and run FPGA synthesis again. The code ends up in the FPGA via VHDL.
 
-### UART anschliessen an MAC
+```
+cdproject
+cd VexRiscv
+sbt "runMain vexriscv.demo.de1_murax_franz"
+cp ./de1_murax_franz.vhd ../src/
+```
 
-Die UART läuft mit 115200 Baud. Mit einem FTDI USB UART Adapter kann man die UART vom DE1 Board anschliessen. Es wird eine Nachricht gesendet und die Eingaben kommen zurück. Auf MacOS:
+### Connect UART to MAC
+
+The UART runs at 115,200 baud. Using an FTDI USB UART adapter, you can connect the UART from the DE1 board. A message is sent, and the inputs are returned. On MacOS:
 
 ```
 screen /dev/tty.usbserial-FTALDMJL 115200
@@ -100,7 +136,7 @@ make
 
 ### Debug mit OpenOCD
 
-Habe ich nicht ausprobiert, aber die JTAG Pins sind auf dem Expansionport 1 vom DE1 Board.
+This is untested, but the JTAG Pins are on the Expansionport 1 of the DE1 Board.
 
 ```
 GPIO_1[1] - JTAG_TCK
