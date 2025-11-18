@@ -4,7 +4,7 @@ object ModcntrSim extends App {
   SimConfig.withWave.compile(new Modcntr).doSim {
     dut =>
     
-    dut.clockDomain.forkStimulus(period = 1) // TODO half or full period? --> Full I believe
+    dut.clockDomain.forkStimulus(period = 5) // TODO half or full period? --> Full I believe
     
     dut.io.top_in #= 15
     
