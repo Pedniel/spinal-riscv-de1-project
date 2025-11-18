@@ -24,4 +24,4 @@ Build by using:
 
 # Waveform example:
 
-<img src="img/swappy-20251118-125500.png" width="400">
+<img src="img/swappy-20251118-125500.png" width="700">
