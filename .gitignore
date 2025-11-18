@@ -14,5 +14,8 @@ pnr/de1_murax_franz/incremental_db/*
 !pnr/de1_murax_franz/de1_murax_franz_pins.tcl
 !pnr/de1_murax_franz/makefile
 
-
-
+# Source compile files
+src/modcntr/project/*
+src/modcntr/simWorkspace/*
+src/modcntr/target/*
+src/modcntr/tmp/*
