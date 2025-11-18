@@ -1,4 +1,12 @@
-# Simple modulo counter set by top register
+# Simple Modulo Counter
+
+# Usage
+
+1. Set the top-register with the modulo value
+
+2. The counter will count up until the value is reached and then reset to '0'.
+
+3. If the top-register is changed during runtime, the counter will restart from '0'.
 
 # Install prerequisites:
 
