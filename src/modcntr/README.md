@@ -22,3 +22,6 @@ Build by using:
    gtkwave simWorkspace/Modcntr/test.vcd
 ```
 
+# Waveform example:
+
+<img src="img/swappy-20251118-125500.png" width="400">
