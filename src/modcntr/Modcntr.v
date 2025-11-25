@@ -1,0 +1,47 @@
+// Generator : SpinalHDL v1.9.4    git head : 270018552577f3bb8e5339ee2583c9c22d324215
+// Component : Modcntr
+// Git hash  : f66f158e07e38c9cb076af2ff47eb4868be2ba21
+
+`timescale 1ns/1ps
+
+module Modcntr (
+  input  wire [15:0]   top_in,
+  input  wire          clr_in,
+  output reg           pulse_out,
+  input  wire          clk,
+  input  wire          reset
+);
+
+  reg        [15:0]   ctr;
+  wire                when_modcnt_l16;
+  wire                when_modcnt_l18;
+
+  always @(*) begin
+    pulse_out = 1'b0;
+    if(!when_modcnt_l16) begin
+      if(when_modcnt_l18) begin
+        pulse_out = 1'b1;
+      end
+    end
+  end
+
+  assign when_modcnt_l16 = (clr_in == 1'b1);
+  assign when_modcnt_l18 = (ctr == top_in);
+  always @(posedge clk or posedge reset) begin
+    if(reset) begin
+      ctr <= 16'h0000;
+    end else begin
+      if(when_modcnt_l16) begin
+        ctr <= 16'h0000;
+      end else begin
+        if(when_modcnt_l18) begin
+          ctr <= 16'h0000;
+        end else begin
+          ctr <= (ctr + 16'h0001);
+        end
+      end
+    end
+  end
+
+
+endmodule
