@@ -1,10 +1,13 @@
+import spinal.core._
+import spinal.lib._
+
 // Register addr offest
 object SigmaDeltaReg {
   val DIV  = 0x00  
   val INT  = 0x04  
 }
 
-case class SigDeltaFreqDiv(val int, div : Int) extends Component {
+case class SigDeltaFreqDiv(val int : UInt, val div : UInt) extends Component {
   import SigmaDeltaReg._
   val wordCount = (byteArray.length+3)/4 // Found in MuraxUtiles.scala
   val io = new Bundle{
@@ -52,7 +55,11 @@ case class SigDeltaFreqDiv(val int, div : Int) extends Component {
     io.LEDR := B"8'xFF"
   }
 }
-  
+
+object MyDesignVerilog extends App {
+  SpinalVerilog(new SigDeltaFreqDiv)
+} 
+
   /////////////////////////////////////////////////
   // Apb Summary for me :                         //
   //                                              //
