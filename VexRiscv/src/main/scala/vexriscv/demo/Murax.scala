@@ -565,7 +565,15 @@ object de1_murax_franz{
       onChipRamSize = 4 kB,
       onChipRamHexFile = "src/main/ressource/hex/muraxDemo.hex"))
 
-    io.LEDR <> murax.io.gpioA.write(7 downto 0)
+    //io.LEDR <> murax.io.gpioA.write(7 downto 0)
+
+    val sigDelta = new SigDeltaFreqDiv()
+
+    murax.system.apbMapping += sigDelta.io.apb -> (0x40000, 4 kB)
+    murax.system.apbDecoder.setCompositeName(murax.system.apbBridge.io.apb, "apbBridge")
+
+    sigDelta.io.KEY0 := io.KEY0
+    io.LEDR := sigDelta.io.LEDR
 
     murax.io.jtag.tck <> io.jtag_tck
     murax.io.jtag.tdi <> io.jtag_tdi

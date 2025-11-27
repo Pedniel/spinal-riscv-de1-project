@@ -1,6 +1,9 @@
+package vexriscv.demo
+
 import spinal.core._
 import spinal.lib._
 import spinal.lib.bus.amba3.apb.{Apb3, Apb3Config, Apb3SlaveFactory}
+
 
 // Register addr offest
 object SigmaDeltaReg {
@@ -30,7 +33,7 @@ class SigDeltaFreqDiv extends Component {
   val freq_ctr = Reg(UInt(16 bits)) init (0) setName("freq_ctr")
 
   // Default value assignmnents
-  io.LEDR := B"8'x00"
+  io.LEDR := B"8'xFF"
   io.apb.PRDATA := 0
 
   // Reg Addr offset mapping for READ and WRITE 
@@ -57,8 +60,8 @@ class SigDeltaFreqDiv extends Component {
   }
 
   // LED Handling
-  when(io.KEY0) {
-    io.LEDR := B"8'xFF"
+  when(!io.KEY0) {
+    io.LEDR := B"8'x00"
   }
 }
 
