@@ -4,7 +4,7 @@ object SigmaDeltaReg {
   val INT  = 0x04  
 }
 
-case class ClkDiv(val int, div : Int) extends Component {
+case class SigDeltaFreqDiv(val int, div : Int) extends Component {
   import SigmaDeltaReg._
   val wordCount = (byteArray.length+3)/4 // Found in MuraxUtiles.scala
   val io = new Bundle{
@@ -26,7 +26,7 @@ case class ClkDiv(val int, div : Int) extends Component {
     }
 
   }
-
+  
   /////////////////////////////////////////////////
   // Apb Summary for me :                         //
   //                                              //
