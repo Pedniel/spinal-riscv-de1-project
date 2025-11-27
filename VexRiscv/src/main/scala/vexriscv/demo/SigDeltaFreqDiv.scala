@@ -5,7 +5,7 @@ import spinal.lib._
 import spinal.lib.bus.amba3.apb.{Apb3, Apb3Config, Apb3SlaveFactory}
 
 
-// Register addr offest
+// Register addr offest 
 object SigmaDeltaReg {
   val DIV         = 0x00  
   val INT         = 0x04
@@ -16,7 +16,7 @@ object SigmaDeltaReg {
 class SigDeltaFreqDiv extends Component {
   import SigmaDeltaReg._
   val io = new Bundle{
-    val apb = slave(Apb3(addressWidth, dataWidth)) // addressWidth, dataWidth
+    val apb = slave(Apb3(addressWidth, dataWidth))
     val KEY0     = in Bool() setName("LED_KEY")
     val LEDR     = out Bits(8 bits) setName("LED_OUT")                                 
   }
@@ -36,7 +36,7 @@ class SigDeltaFreqDiv extends Component {
   io.LEDR := B"8'xFF"
   io.apb.PRDATA := 0
 
-  // Reg Addr offset mapping for READ and WRITE 
+  // Reg Addr offset mapping for READ and WRITE (untested for now)
   when(apbWrite) {
     switch(io.apb.PADDR) {
       is(U(DIV, 4 bits)) {
@@ -90,9 +90,5 @@ object MyDesignVhdl extends App {
   //  Documentation found here:                                    //
   //https://wifasoi.github.io/SpinalDoc/spinal/lib/bus/amba3/apb3/ //
   //                                                               //
-  //  To create VHDL/Verilog files, run:                           //
-  //  sbt "runMain MyDesignVhdl"                                   //
-  //  or                                                           //
-  //  sbt "runMain MyDesignVerilog"                                //
   ///////////////////////////////////////////////////////////////////
 
