@@ -8,8 +8,8 @@ object PwmSim extends App {
     
     dut.clockDomain.forkStimulus(period = 5) // TODO half or full period? --> Full I believe
     
-    dut.io.top_in #= 15
-    dut.io.ctr_in #= 30
+    dut.io.top_in #= 40
+    dut.io.cc_in #= 30
     dut.io.clr_in #= false
     dut.clockDomain.waitSampling(100)
     
@@ -18,8 +18,32 @@ object PwmSim extends App {
     
     dut.io.clr_in #= false
     dut.io.top_in #= 20
-    dut.io.ctr_in #= 5    
+    dut.io.cc_in #= 5    
     dut.clockDomain.waitSampling(250)
+
+    dut.io.clr_in #= true
+    dut.clockDomain.waitSampling(1)
+    
+    dut.io.clr_in #= false
+    dut.io.top_in #= 30
+    dut.io.cc_in #= 40    
+    dut.clockDomain.waitSampling(200)
+
+    dut.io.clr_in #= true
+    dut.clockDomain.waitSampling(1)
+    
+    dut.io.clr_in #= false
+    dut.io.top_in #= 15
+    dut.io.cc_in #= 15    
+    dut.clockDomain.waitSampling(200)
+
+    dut.io.clr_in #= true
+    dut.clockDomain.waitSampling(1)
+    
+    dut.io.clr_in #= false
+    dut.io.top_in #= 30
+    dut.io.cc_in #= 15    
+    dut.clockDomain.waitSampling(200)
 
     simSuccess()
     simThread.suspend()
