@@ -1,14 +1,16 @@
+package pwm
 import spinal.core._
 import spinal.lib._
+import spinal.core.sim._
 
-class Pwm extends Component {
+class Pwm() extends Component {
 
   val io = new Bundle {
-    val top_in = in port UInt(16 bits) setName("top_in") // Defines the whole PWM period
-    val cc_in = in port UInt(16 bits) setName("cc_in")
-    val clr_in = in port Bool() setName("clr_in")
-    val en_in = in port Bool() setName("en_in")
-    val pulse_o = out port Bool() setName("pulse_out")
+    val top_in = in UInt(16 bits) setName("top_in")  // Defines the whole PWM period
+    val cc_in = in UInt(16 bits) setName("cc_in") 
+    val clr_in = in Bool() setName("clr_in") 
+    val en_in = in Bool() setName("en_in")
+    val pulse_o = out Bool() setName("pulse_out")
   }
 
   // Registers
