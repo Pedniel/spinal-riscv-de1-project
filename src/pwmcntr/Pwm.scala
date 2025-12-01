@@ -1,20 +1,18 @@
-package pwm
+package pwmcore
 import spinal.core._
 import spinal.lib._
-import spinal.core.sim._
 
-class Pwm() extends Component {
-
+class Pwm() extends Component{
   val io = new Bundle {
-    val top_in = in UInt(16 bits) setName("top_in")  // Defines the whole PWM period
-    val cc_in = in UInt(16 bits) setName("cc_in") 
-    val clr_in = in Bool() setName("clr_in") 
-    val en_in = in Bool() setName("en_in")
-    val pulse_o = out Bool() setName("pulse_out")
+    val top_in = in UInt(16 bits)
+    val cc_in = in UInt(16 bits) 
+    val clr_in = in Bool()
+    val en_in = in Bool() 
+    val pulse_o = out Bool() 
   }
 
   // Registers
-  val ctr = Reg(UInt(16 bits)) init (0) setName("ctr") 
+  val ctr = Reg(UInt(16 bits)) init (0) 
 
   // Functions
   def PWM_CYCLE_LENGTH_REACHED(): Bool = (ctr === io.top_in)
@@ -33,15 +31,12 @@ class Pwm() extends Component {
     ctr := 0
     
   } elsewhen(io.en_in === True) {
-      when (PWM_CYCLE_LENGTH_REACHED()) {
-        ctr := 0
-      } otherwise {
-        ctr := ctr + 1    
-      }
+    when (PWM_CYCLE_LENGTH_REACHED()) {
+      ctr := 0
+    } otherwise {
+      ctr := ctr + 1    
+    }
   }
-
+  
 }
 
-object MyDesignVerilog extends App {
-  SpinalVerilog(new Pwm)
-} 
