@@ -14,9 +14,9 @@ class PwmSystem() extends Component{
   val divider  = new FreqDiv()
   val pwm = new Pwm() 
     
-  pwm.io.top_in := U"x00FF"
+  pwm.io.top_in := io.pwm_top_in
 
-  pwm.io.cc_in      := U"x000F"
+  pwm.io.cc_in      := io.pwm_cc_in
   divider.io.div_in := io.div_config
   pwm.io.en_in      := True
   io.pulse_o        := pwm.io.pulse_o
