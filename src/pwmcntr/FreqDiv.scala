@@ -17,7 +17,7 @@ class FreqDiv() extends Component {
   when (frac_acc.msb === True) {
     frac_acc := (False ## frac_acc(3 downto 0)).asUInt
     io.en_o := False
-  } elsewhen (ctr === io.div_in) {
+  } elsewhen (ctr === (io.div_in >> 4)) {
     ctr := 0
     io.en_o := True
     frac_acc := frac_acc(3 downto 0) +^ io.div_in(3 downto 0)
