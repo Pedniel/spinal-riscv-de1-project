@@ -27,8 +27,8 @@ Build by using:
 
 Small part of the simulation, for better viewing:
 
-<img src="img/sim-snippet.png" width="700">
+<img src="img/sim-snippet1.png" width="700">
 
 Full simulation screenshot:
 
-<img src="img/sim-full.png" width="700">
+<img src="img/sim-full1.png" width="700">
