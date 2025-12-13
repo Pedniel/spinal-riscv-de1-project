@@ -10,10 +10,13 @@ class PwmSystem() extends Component{
     val pwm_clr_in   = in Bool()
     val div_config  = in UInt(12 bits) 
     val pulse_o     = out Bool()
+    val ctr_freqdiv_o = out UInt(8 bits)
   }
 
   val divider  = new FreqDiv()
-  val pwm = new Pwm() 
+  val pwm = new Pwm()
+
+  io.ctr_freqdiv_o := divider.io.ctr_o
     
   pwm.io.top_in     := io.pwm_top_in
   pwm.io.cc_in      := io.pwm_cc_in
@@ -24,16 +27,10 @@ class PwmSystem() extends Component{
   
   io.pulse_o        := pwm.io.pulse_o
 
-//  when (divider.io.en_o){ 
-//    pwm.io.en_in := True  
-//  } otherwise {
-//    pwm.io.en_in := False 
-//  }                       
-
 }
   
 object PwmSystem{  
   def main(args: Array[String]) {
-    SpinalVhdl(new PwmSystem())
+    SpinalVerilog(new PwmSystem())
   }
 }
