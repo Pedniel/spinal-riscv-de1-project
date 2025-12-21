@@ -585,6 +585,16 @@ object de1_murax_franz{
     murax.io.asyncReset <> ! io.KEY0
     murax.io.mainClk <> io.CLOCK_50
 
+  //   PWM INTERFACE:
+  //   val io = new Bundle {
+  //   val pwm_top_in  = in UInt(16 bits)
+  //   val pwm_cc_in   = in UInt(16 bits)
+  //   val pwm_clr_in   = in Bool()
+  //   val div_config  = in UInt(12 bits)
+  //   val pulse_o     = out Bool()
+  //   val ctr_freqdiv_o = out UInt(8 bits)
+  // }
+
   }
 
   def main(args: Array[String]) {
