@@ -29,7 +29,6 @@ class PwmSystem() extends Component{
     
   pwm.io.top_in     := io.pwm_top_in
   pwm.io.cc_in      := io.pwm_cc_in
-  pwm.io.en_in      := divider.io.en_o
   pwm.io.clr_in     := io.pwm_clr_in
   
   divider.io.div_in := io.div_config
@@ -43,6 +42,7 @@ class PwmSystem() extends Component{
     val busClearing = False
 
     pwm.io.clr_in := (clrEnable & clears.asBits).orR | busClearing
+    pwm.io.en_in := (pwmEnable & divider.io.en_o)
     //io.tick := (pwmEnable  & ticks.asBits ).orR
 
     // Offset 4 => read/write limit (+ auto clear)
