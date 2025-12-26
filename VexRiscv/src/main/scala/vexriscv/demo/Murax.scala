@@ -169,8 +169,9 @@ case class Murax(config : MuraxConfig) extends Component{
     val uart = master(Uart())
 
     val xip = ifGen(genXip)(master(SpiXdrMaster(xipConfig.ctrl.spi)))
-  }
 
+    val pwmOut = out Bool()
+  }
 
   val resetCtrlClockDomain = ClockDomain(
     clock = io.mainClk,
@@ -294,6 +295,10 @@ case class Murax(config : MuraxConfig) extends Component{
     val timer = new MuraxApb3Timer()
     timerInterrupt setWhen(timer.io.interrupt)
     apbMapping += timer.io.apb     -> (0x20000, 4 kB)
+
+    val pwmSystem = new PwmSystem()
+    apbMapping += pwmSystem.io.apb -> (0x40000, 4 kB)
+    io.pwmOut := pwmSystem.io.pulse_o
 
     val xip = ifGen(genXip)(new Area{
       val ctrl = Apb3SpiXdrMasterCtrl(xipConfig)
@@ -565,15 +570,17 @@ object de1_murax_franz{
       onChipRamSize = 4 kB,
       onChipRamHexFile = "src/main/ressource/hex/muraxDemo.hex"))
 
-    //io.LEDR <> murax.io.gpioA.write(7 downto 0)
 
-    val sigDelta = new SigDeltaFreqDiv()
+    val pwm_out = murax.io.pwmOut
+    io.LEDR(0) := pwm_out
+    io.LEDR(1) := pwm_out
+    io.LEDR(2) := pwm_out
+    io.LEDR(3) := pwm_out
+    io.LEDR(4) := pwm_out
+    io.LEDR(5) := pwm_out
+    io.LEDR(6) := pwm_out
+    io.LEDR(7) := pwm_out
 
-    murax.system.apbMapping += sigDelta.io.apb -> (0x40000, 4 kB)
-    murax.system.apbDecoder.setCompositeName(murax.system.apbBridge.io.apb, "apbBridge")
-
-    sigDelta.io.KEY0 := io.KEY0
-    io.LEDR := sigDelta.io.LEDR
 
     murax.io.jtag.tck <> io.jtag_tck
     murax.io.jtag.tdi <> io.jtag_tdi
