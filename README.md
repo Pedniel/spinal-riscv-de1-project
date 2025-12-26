@@ -87,6 +87,13 @@ cp ./build/demo.hex ../../../../VexRiscv/src/main/ressource/hex/muraxDemo.hex
 
 Then build VexRiscv again and run FPGA synthesis again. The code ends up in the FPGA via VHDL.
 
+If you use a different java version than java 8, installed java 8 first and use these commands before running sbt:
+
+```
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+```
+
 ```
 cdproject
 cd VexRiscv
