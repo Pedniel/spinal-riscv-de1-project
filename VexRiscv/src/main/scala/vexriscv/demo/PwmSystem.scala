@@ -23,16 +23,16 @@ class PwmSystem() extends Component{
   driveFromBus(busCtrl, 0x00)
 
   def driveFromBus(busCtrl: BusSlaveFactory, baseAddress: BigInt) = new Area {
-    val pwmTop = busCtrl.createReadAndWrite(UInt(16 bits), baseAddress + 0x00) init(U"h000F")  // 16 bits
+    val pwmTop = busCtrl.createReadAndWrite(UInt(16 bits), baseAddress + 0x00) init(0)
     pwm.io.top_in := pwmTop
 
-    val pwmCompare = busCtrl.createReadAndWrite(UInt(16 bits), baseAddress + 0x04) init(U"h0005") // 16 bits
+    val pwmCompare = busCtrl.createReadAndWrite(UInt(16 bits), baseAddress + 0x04) init(0)
     pwm.io.cc_in := pwmCompare
 
-    val divConfig = busCtrl.createReadAndWrite(UInt(12 bits), baseAddress + 0x08) init(U"b000000100101") // 12 bits
+    val divConfig = busCtrl.createReadAndWrite(UInt(12 bits), baseAddress + 0x08) init(0)
     divider.io.div_in := divConfig
 
-    val control = busCtrl.createReadAndWrite(Bits(32 bits), baseAddress + 0x0C) init(B"h00000001")
+    val control = busCtrl.createReadAndWrite(Bits(32 bits), baseAddress + 0x0C) init(0)
     val pwmEnable = control(0)
     val pwmClear = control(1)
 
