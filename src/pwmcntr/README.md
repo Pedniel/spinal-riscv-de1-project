@@ -9,6 +9,22 @@
     sudo apt install gtkwave
 ```
 
+At the time of writing this, Verilator 5 just released to apt Repos. However, Verilator 4 is still needed for this. If you can't find a binary, build with:
+
+``` sh
+sudo apt install -y git make autoconf g++ flex bison
+
+git clone https://github.com/verilator/verilator
+cd verilator
+git checkout v4.228
+
+autoconf
+./configure
+make -j$(nproc)
+sudo make install
+
+```
+
 # Build
 
 Build by using:
