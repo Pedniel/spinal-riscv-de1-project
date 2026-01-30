@@ -23,6 +23,24 @@ object FullPwmSim extends App {
     dut.clockDomain.waitSampling(500)
 
     // Block 2
+    dut.io.div_config #= 34 //37 -> 0000 0010 0010 --> 2,2
+    dut.io.pwm_clr_in #= true
+    dut.clockDomain.waitSampling(1)
+    dut.io.pwm_clr_in #= false
+    dut.io.pwm_cc_in #= 5 
+    dut.io.pwm_top_in #= 15
+    dut.clockDomain.waitSampling(500)
+
+    // Block 3
+    dut.io.div_config #= 35 //37 -> 0000 0010 0011 --> 2,3
+    dut.io.pwm_clr_in #= true
+    dut.clockDomain.waitSampling(1)
+    dut.io.pwm_clr_in #= false
+    dut.io.pwm_cc_in #= 5 
+    dut.io.pwm_top_in #= 15
+    dut.clockDomain.waitSampling(500)    
+    
+    // Block 4
     dut.io.pwm_clr_in #= true
     dut.clockDomain.waitSampling(1)
     dut.io.div_config #= 0 // Test max value of 256, per datasheet page 1083
