@@ -13,12 +13,9 @@ class FreqDiv() extends Component {
   val frac_acc = Reg(UInt(5 bits)) init((False ## io.div_in(3 downto 0)).asUInt)
   val ctr      = Reg(UInt(8 bits)) init(0)
 
-  // comb logic
-  val frac_acc_comb = UInt(5 bits)
 
   io.en_o := False
   io.ctr_o := ctr
-  frac_acc_comb := frac_acc(3 downto 0) +^ io.div_in(3 downto 0)
 
 // FSM
   when (frac_acc.msb === True) {
