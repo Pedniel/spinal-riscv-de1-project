@@ -27,6 +27,11 @@ void main() {
 	UART->STATUS = 2; //Enable RX interrupts
 	UART->DATA = 'A';
 
+	PWM->TOP = 0x000F;
+	PWM->COMPARE = 0x0005;
+	PWM->DIVCONFIG = 0x025;
+	PWM->CONTROL = 0x00000001;
+
 	while(1){
 		result += a;
 		result += b + c;

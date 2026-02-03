@@ -19,3 +19,8 @@ src/modcntr/project/*
 src/modcntr/simWorkspace/*
 src/modcntr/target/*
 src/modcntr/tmp/*
+
+src/pwmcntr/project/*
+src/pwmcntr/simWorkspace/*
+src/pwmcntr/target/*
+src/pwmcntr/tmp/*
